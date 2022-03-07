@@ -2,7 +2,6 @@
 
 include __DIR__ . "/../vendor/autoload.php";
 
-use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -14,23 +13,42 @@ class User
     private string $password;
     private DateTime $creationDateTime;
 
-    public function __construct(int $id, string $name, string $email, string $password)
+    /**
+     * Constructor
+     * @param int $id
+     * @param string $name
+     * @param string $email
+     * @param string $password
+     */
+    public function __construct(int $id, string $name, string $email, string $password, DateTime $creationDateTime = null)
     {
         $this->id = $id;
         $this->name = $name;
         $this->email = $email;
         $this->password = $password;
-        $this->creationDateTime = new DateTime('NOW');
+        if (!is_null($creationDateTime))
+        {
+            $this->creationDateTime = $creationDateTime;
+        }
+        else
+        {
+            $this->creationDateTime = new DateTime('NOW');
+        }
     }
 
     /**
      * Getter for creationDateTime
+     * @return DateTime
      */
     public function getCreationDateTime() : DateTime
     {
         return $this->creationDateTime;
     }
 
+    /**
+     * Function for validator.
+     * @param ClassMetadata $metadata
+     */
     public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
         $metadata->addPropertyConstraints( "id", 

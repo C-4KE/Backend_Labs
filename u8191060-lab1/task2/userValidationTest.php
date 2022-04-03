@@ -14,15 +14,12 @@ function validateUser(User $user)
 
     echo 'Class\'s creation date and time: ' . $user->getCreationDateTime()->format('d-m-Y H:i:s') . '<br>';
 
-    if (count($errors) > 0)
-    {
-        foreach($errors as $error)
-        {
+    if (count($errors) > 0) {
+
+        foreach($errors as $error) {
             echo $error->getMessage().'<br>';
         }
-    }
-    else
-    {
+    } else {
         echo 'Valid user.';
     }
 }
@@ -46,5 +43,3 @@ echo '<br>';
 $newUser = new User(5, "R2-D2", "bip_bup@star_wars.com", "s#!?*2");
 validateUser($newUser);
 echo '<br>';
-
-?>

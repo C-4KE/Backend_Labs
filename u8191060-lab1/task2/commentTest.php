@@ -27,14 +27,12 @@ $controlDateTime = new DateTime('01-06-2021 00:00:00');
 echo 'Control date and time: ' . $controlDateTime->format('d-m-Y H:i:s') . '<br><br>';
 
 // Вывод только тех сообщений, создатели которых были зарегистрированы после controlDateTime
-foreach ($comments as $comment)
-{
-    if ($comment->getAuthor()->getCreationDateTime() > $controlDateTime)
-    {
+foreach ($comments as $comment) {
+    
+    if ($comment->getAuthor()->getCreationDateTime() > $controlDateTime) {
+
         echo 'Comment\'s author\'s creation date and time: ' . $comment->getAuthor()->getCreationDateTime()->format('d-m-Y H:i:s') . '<br>';
         echo 'Comment: ' . '<br>'; 
         echo $comment->getContent() . '<br><br>';
     }
 }
-
-?>

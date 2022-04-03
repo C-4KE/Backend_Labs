@@ -18,5 +18,3 @@ if (0 !== count($violations)) {
         echo $violation->getMessage().'<br>';
     }
 }
-
-?>

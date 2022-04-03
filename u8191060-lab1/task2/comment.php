@@ -16,7 +16,7 @@ class Comment
      * @param User $author
      * @param string $content
      */
-    public function __construct(User $author, string $content)
+    public function __construct(User $author, string $content) 
     {
         $this->author = $author;
         $this->content = $content;
@@ -26,7 +26,7 @@ class Comment
      * Getter for the author.
      * @return User
      */
-    public function getAuthor() : User
+    public function getAuthor(): User 
     {
         return $this->author;
     }
@@ -35,7 +35,7 @@ class Comment
      * Getter for the content.
      * @return string
      */
-    public function getContent() : string
+    public function getContent(): string 
     {
         return $this->content;
     }
@@ -44,9 +44,9 @@ class Comment
      * Function for validator.
      * @param ClassMetadata $metadata
      */
-    public static function loadValidatorMetadata(ClassMetadata $metadata)
+    public static function loadValidatorMetadata(ClassMetadata $metadata) 
     {
-        $metadata->addPropertyConstraints( "content", 
+        $metadata->addPropertyConstraints("content", 
         [
             new Assert\NotBlank([
                 'message' => 'Comment can\'t be blank.'
@@ -61,5 +61,3 @@ class Comment
     }
 
 }
-
-?>

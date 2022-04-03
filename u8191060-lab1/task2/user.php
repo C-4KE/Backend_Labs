@@ -26,12 +26,9 @@ class User
         $this->name = $name;
         $this->email = $email;
         $this->password = $password;
-        if (!is_null($creationDateTime))
-        {
+        if (!is_null($creationDateTime)) {
             $this->creationDateTime = $creationDateTime;
-        }
-        else
-        {
+        } else {
             $this->creationDateTime = new DateTime('NOW');
         }
     }
@@ -40,7 +37,7 @@ class User
      * Getter for creationDateTime
      * @return DateTime
      */
-    public function getCreationDateTime() : DateTime
+    public function getCreationDateTime(): DateTime
     {
         return $this->creationDateTime;
     }
@@ -51,7 +48,7 @@ class User
      */
     public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
-        $metadata->addPropertyConstraints( "id", 
+        $metadata->addPropertyConstraints("id", 
         [
             new Assert\Positive([
                 'message' => 'User\'s id must be positive number.'
@@ -59,7 +56,7 @@ class User
 
         ]);
         
-        $metadata->addPropertyConstraints( "name",
+        $metadata->addPropertyConstraints("name",
         [
             new Assert\NotBlank([
                 'message' => 'User\'s name can\'t be blank.'
@@ -76,7 +73,7 @@ class User
             ])
         ]);
 
-        $metadata->addPropertyConstraints( "email", 
+        $metadata->addPropertyConstraints("email", 
         [
             new Assert\NotBlank([
                 'message' => 'User\'s email can\'t be blank.'
@@ -86,7 +83,7 @@ class User
             ])
         ]);
 
-        $metadata->addPropertyConstraints( "password", 
+        $metadata->addPropertyConstraints("password", 
         [
             new Assert\NotBlank([
                 'message' => 'User\'s password can\'t be blank.'
@@ -105,5 +102,3 @@ class User
     }
 
 }
-
-?>

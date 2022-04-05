@@ -31,4 +31,9 @@ class Address extends Model
     {
         return AddressFactory::new();
     }
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class, 'customer_id', 'id');
+    }
 }

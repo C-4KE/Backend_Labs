@@ -14,6 +14,13 @@ class Customer extends Model
     protected $attributes = [
         'is_banned' => false,
     ];
+    protected $fillable = [
+        'is_banned',
+        'name',
+        'surname',
+        'phone',
+        'email',
+    ];
 
     /**
      * Create a new factory instance for the model.
@@ -23,5 +30,10 @@ class Customer extends Model
     protected static function newFactory()
     {
         return CustomerFactory::new();
+    }
+
+    public function addresses()
+    {
+        return $this->hasMany(Address::class, 'customer_id');
     }
 }

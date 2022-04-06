@@ -34,6 +34,6 @@ class Customer extends Model
 
     public function addresses()
     {
-        return $this->hasMany(Address::class, 'customer_id');
+        return $this->hasMany(Address::class, 'customer_id', 'id');
     }
 }

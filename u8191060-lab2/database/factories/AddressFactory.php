@@ -23,7 +23,7 @@ class AddressFactory extends Factory
     {
         return [
             'customer_id' => Customer::all()->random()->id,
-            'title' => $this->faker->title(),
+            'title' => $this->faker->word(),
             'city' => $this->faker->city(),
             'street' => $this->faker->streetAddress(),
             'house' => (string)rand(0, 100),

@@ -25,6 +25,34 @@ paths:
                       $ref: "#/components/schemas/Book"
                   errors: null
                   meta: null
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: null
+                  errors:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Error"
+                  meta:
+                    type: object
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: null
+                  errors:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Error"
+                  meta:
+                    type: object
         default:
           description: Unexpected error
           content:
@@ -37,7 +65,8 @@ paths:
                     type: array
                     items:
                       $ref: "#/components/schemas/Error"
-                  meta: null
+                  meta: 
+                    type: object
   /books/{id}:
     get:
       summary: Info for a specific book
@@ -64,6 +93,48 @@ paths:
                     $ref: "#/components/schemas/Book"
                   errors: null
                   meta: null
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: null
+                  errors:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Error"
+                  meta:
+                    type: object
+        '404':
+          description: Requested data was not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: null
+                  errors:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Error"
+                  meta:
+                    type: object
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: null
+                  errors:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Error"
+                  meta:
+                    type: object
         default:
           description: Unexpected error
           content:
@@ -76,7 +147,8 @@ paths:
                     type: array
                     items:
                       $ref: "#/components/schemas/Error"
-                  meta: null
+                  meta: 
+                    type: object
 components:
   schemas:
     Book:

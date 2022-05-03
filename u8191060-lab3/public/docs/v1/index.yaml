@@ -1,14 +1,49 @@
 openapi : "3.0.0"
 info:
   version: 1.0.0
-  title: Книжный архив
+  title: Books archive
 servers:
   - url: http://u8191060-lab3.local/api/v1
 paths:
+  /books:
+    get:
+      summary: Info about all books
+      operationId: showAllBooks
+      tags:
+        - books
+      responses:
+        '200':
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Book"
+                  errors: null
+                  meta: null
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: null
+                  errors:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Error"
+                  meta: null
   /books/{id}:
     get:
       summary: Info for a specific book
       operationId: showBookById
+      tags:
+        - books
       parameters:
         - name: id
           in: path

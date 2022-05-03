@@ -5,7 +5,7 @@ return [
 
     'urls' => [
         [
-            'url' => 'docs/v1/index.json',
+            'url' => 'docs/v1/index.yaml',
             'name' => 'Спецификация'
         ],
     ],

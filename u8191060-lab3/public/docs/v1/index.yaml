@@ -234,6 +234,112 @@ paths:
                       $ref: "#/components/schemas/Error"
                   meta: 
                     type: object
+    put:
+      summary: Fully update a specific book
+      operationId: updateBook
+      tags:
+        - books
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The id of the book to retrieve
+          schema:
+            type: integer
+            format: int64
+        - name: title
+          in: query
+          required: true
+          description: Title of the book
+          schema:
+            type: string
+        - name: author
+          in: query
+          required: true
+          description: Author of the book
+          schema:
+            type: string
+        - name: publisher
+          in: query
+          requierd: false
+          description: Publisher of the book
+          schema:
+            type: string
+        - name: release_date
+          in: query
+          required: true
+          description: Date of the book's release (only year matters)
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Book"
+                  errors: null
+                  meta: null
+        '400':
+          description: Invalid request parameters or missing required parameters
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: null
+                  errors:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Error"
+                  meta:
+                    type: object
+        '404':
+          description: Book was not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: null
+                  errors:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Error"
+                  meta:
+                    type: object
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: null
+                  errors:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Error"
+                  meta:
+                    type: object
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: null
+                  errors:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Error"
+                  meta: 
+                    type: object
 components:
   schemas:
     Book:

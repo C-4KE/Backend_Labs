@@ -1,7 +1,12 @@
 <?php
 
 return [
-    'path' => 'api/swagger',
+    'path' => 'docs/swagger',
 
-    'urls' => [],
+    'urls' => [
+        [
+            'url' => 'docs/v1/index.json',
+            'name' => 'Спецификация'
+        ],
+    ],
 ];

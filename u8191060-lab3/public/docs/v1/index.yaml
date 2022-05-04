@@ -53,20 +53,6 @@ paths:
                       $ref: "#/components/schemas/Error"
                   meta:
                     type: object
-        default:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data: null
-                  errors:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/Error"
-                  meta: 
-                    type: object
     post:
       summary: Add new book
       operationId: addNewBook
@@ -138,20 +124,6 @@ paths:
                       $ref: "#/components/schemas/Error"
                   meta:
                     type: object
-        default:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data: null
-                  errors:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/Error"
-                  meta: 
-                    type: object
   /books/{id}:
     get:
       summary: Info for a specific book
@@ -219,20 +191,6 @@ paths:
                     items:
                       $ref: "#/components/schemas/Error"
                   meta:
-                    type: object
-        default:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data: null
-                  errors:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/Error"
-                  meta: 
                     type: object
     put:
       summary: Fully update a specific book
@@ -326,20 +284,6 @@ paths:
                       $ref: "#/components/schemas/Error"
                   meta:
                     type: object
-        default:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data: null
-                  errors:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/Error"
-                  meta: 
-                    type: object
     patch:
       summary: Update choosen fields of the specific book
       operationId: changeBook
@@ -432,20 +376,6 @@ paths:
                       $ref: "#/components/schemas/Error"
                   meta:
                     type: object
-        default:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data: null
-                  errors:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/Error"
-                  meta: 
-                    type: object
     delete:
       summary: Delete a specific book
       operationId: deleteBook
@@ -483,20 +413,6 @@ paths:
                     items:
                       $ref: "#/components/schemas/Error"
                   meta:
-                    type: object
-        default:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data: null
-                  errors:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/Error"
-                  meta: 
                     type: object
   /bookcases:
     get:
@@ -546,20 +462,6 @@ paths:
                       $ref: "#/components/schemas/Error"
                   meta:
                     type: object
-        default:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data: null
-                  errors:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/Error"
-                  meta: 
-                    type: object
   /bookcases/{id}:
     get:
       summary: Info about specific bookcase
@@ -589,7 +491,7 @@ paths:
                 type: object
                 properties:
                   data:
-                    $ref: "#/components/schemas/Bookcase"
+                    $ref: "#/components/schemas/BookcaseWithBooks"
                   errors: null
                   meta: null
         '400':
@@ -634,20 +536,6 @@ paths:
                       $ref: "#/components/schemas/Error"
                   meta:
                     type: object
-        default:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data: null
-                  errors:
-                    type: array
-                    items:
-                      $ref: "#/components/schemas/Error"
-                  meta: 
-                    type: object
 components:
   schemas:
     Book:
@@ -681,6 +569,21 @@ components:
           format: int64
         code:
           type: string
+    BookcaseWithBooks:
+      type: object
+      required:
+        - id
+        - code
+      properties:
+        id:
+          type: integer
+          format: int64
+        code:
+          type: string
+        books:
+          type: array
+          items: 
+            $ref: "#/components/schemas/Book"
     Error:
       type: object
       required:

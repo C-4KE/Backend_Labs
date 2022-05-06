@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Bookcase;
+use App\Domain\Archive\Models\Bookcase;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 

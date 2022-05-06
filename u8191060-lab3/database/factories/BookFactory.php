@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Models\Book;
-use App\Models\Bookcase;
+use App\Domain\Archive\Models\Book;
+use App\Domain\Archive\Models\Bookcase;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**

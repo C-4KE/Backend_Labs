@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Domain\Archive\Models;
 
 use Database\Factories\BookcaseFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

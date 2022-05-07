@@ -4,7 +4,7 @@ namespace App\Domain\Archive\Actions;
 
 class ErrorAction
 {
-    public function execute(int $code, string $message)
+    public function execute(string $code, string $message)
     {
         return [$code, $message];
     }

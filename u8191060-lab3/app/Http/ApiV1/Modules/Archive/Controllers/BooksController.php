@@ -6,7 +6,9 @@ use App\Domain\Archive\Actions\DeleteBookAction;
 use App\Domain\Archive\Actions\GetBookAction;
 use App\Domain\Archive\Actions\GetBooksAction;
 use App\Domain\Archive\Actions\ErrorAction;
+use App\Domain\Archive\Actions\PatchBookAction;
 use App\Domain\Archive\Actions\PostBookAction;
+use App\Http\ApiV1\Modules\Archive\Requests\PatchBookRequest;
 use App\Http\ApiV1\Modules\Archive\Requests\PostBookRequest;
 use App\Http\ApiV1\Modules\Archive\Resources\BookResource;
 use App\Http\ApiV1\Modules\Archive\Resources\BooksResource;
@@ -55,6 +57,19 @@ class BooksController
     {
         try {
             return new BookResource($action->execute($request->validated()));
+        } catch (Exception $exc) {
+            return (new ErrorResource((new ErrorAction)->execute(get_class($exc), $exc->getMessage())))->response()->setStatusCode(400);
+        }
+    }
+
+    public function patch($bookId, PatchBookRequest $request, PatchBookAction $action)
+    {
+        try {
+            if (is_numeric($bookId)) {
+                return new BookResource($action->execute($bookId, $request->validated()));
+            } else {
+                return (new ErrorResource((new ErrorAction)->execute('CastingError', 'Invalid id. Id must be integer number.')))->response()->setStatusCode(400);
+            }
         } catch (Exception $exc) {
             return (new ErrorResource((new ErrorAction)->execute(get_class($exc), $exc->getMessage())))->response()->setStatusCode(400);
         }

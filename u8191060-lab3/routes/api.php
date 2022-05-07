@@ -34,3 +34,5 @@ Route::patch('v1/books/{id}', [BooksController::class, 'patch']);
 Route::put('v1/books/{id}', [BooksController::class, 'put']);
 
 Route::get('v1/bookcases', [BookcasesController::class, 'get']);
+
+Route::get('v1/bookcases/{id}', [BookcasesController::class, 'getById']);

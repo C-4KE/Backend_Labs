@@ -3,8 +3,6 @@
 namespace App\Domain\Archive\Actions;
 
 use App\Domain\Archive\Models\Book;
-use Exception;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class GetBookAction
 {

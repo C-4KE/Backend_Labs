@@ -24,3 +24,4 @@ Route::get('v1/books/{id}', [BooksController::class, 'getById']);
 
 Route::get('v1/books', [BooksController::class, 'get']);
 
+Route::delete('v1/books/{id}', [BooksController::class, 'delete']);

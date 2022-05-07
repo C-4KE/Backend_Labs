@@ -1,7 +1,5 @@
 <?php
 
-use App\Domain\Archive\Actions\ErrorAction;
-use App\Domain\Archive\Actions\GetBookAction;
 use Illuminate\Support\Facades\Route;
 use App\Http\ApiV1\Modules\Archive\Controllers\BooksController;
 
@@ -19,7 +17,3 @@ use App\Http\ApiV1\Modules\Archive\Controllers\BooksController;
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/books/{id}', [BooksController::class, 'getById']);
-
-Route::get('/books', [BooksController::class, 'get']);

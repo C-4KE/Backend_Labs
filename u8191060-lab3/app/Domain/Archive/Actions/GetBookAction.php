@@ -10,11 +10,7 @@ class GetBookAction
 {
     public function execute(int $bookId): Book
     {
-        try {
-            $book = Book::findOrFail($bookId);
-            return $book;
-        } catch (Exception $exc) {
-            throw new ModelNotFoundException();
-        }
+        $book = Book::findOrFail($bookId);
+        return $book;
     }
 }

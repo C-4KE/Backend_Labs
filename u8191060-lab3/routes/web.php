@@ -19,3 +19,5 @@ Route::get('/', function () {
 });
 
 Route::get('/books/{id}', [BooksController::class, 'getById']);
+
+Route::get('/books', [BooksController::class, 'get']);

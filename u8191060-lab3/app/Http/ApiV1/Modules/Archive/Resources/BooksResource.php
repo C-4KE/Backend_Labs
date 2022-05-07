@@ -8,6 +8,6 @@ class BooksResource extends BaseJsonResource
 {
     public function toArray($request)
     {
-        return $this->resource;
+        return ['data' => $this->resource];
     }
 }

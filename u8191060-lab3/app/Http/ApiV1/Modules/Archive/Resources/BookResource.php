@@ -8,7 +8,7 @@ class BookResource extends BaseJsonResource
 {
     public function toArray($request)
     {
-        return [
+        return ['data' => [
             'id' => $this->id,
             'title' => $this->title,
             'author' => $this->author,
@@ -17,6 +17,6 @@ class BookResource extends BaseJsonResource
             'bookcase_id' => $this->bookcase_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-        ];
+        ]];
     }
 }

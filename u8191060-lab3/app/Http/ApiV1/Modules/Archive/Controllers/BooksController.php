@@ -6,6 +6,8 @@ use App\Domain\Archive\Actions\DeleteBookAction;
 use App\Domain\Archive\Actions\GetBookAction;
 use App\Domain\Archive\Actions\GetBooksAction;
 use App\Domain\Archive\Actions\ErrorAction;
+use App\Domain\Archive\Actions\PostBookAction;
+use App\Http\ApiV1\Modules\Archive\Requests\PostBookRequest;
 use App\Http\ApiV1\Modules\Archive\Resources\BookResource;
 use App\Http\ApiV1\Modules\Archive\Resources\BooksResource;
 use App\Http\ApiV1\Modules\Archive\Resources\EmptyResource;
@@ -47,5 +49,14 @@ class BooksController
     public function error(string $code, string $message, ErrorAction $action)
     {
         return new ErrorResource($action->execute($code, $message));
+    }
+
+    public function post(PostBookRequest $request, PostBookAction $action)
+    {
+        try {
+            return new BookResource($action->execute($request->validated()));
+        } catch (Exception $exc) {
+            return (new ErrorResource((new ErrorAction)->execute(get_class($exc), $exc->getMessage())))->response()->setStatusCode(400);
+        }
     }
 }

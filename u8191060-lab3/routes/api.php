@@ -25,3 +25,5 @@ Route::get('v1/books/{id}', [BooksController::class, 'getById']);
 Route::get('v1/books', [BooksController::class, 'get']);
 
 Route::delete('v1/books/{id}', [BooksController::class, 'delete']);
+
+Route::post('v1/books', [BooksController::class, 'post']);

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\ApiV1\Modules\Archive\Controllers\BookcasesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -31,3 +32,5 @@ Route::post('v1/books', [BooksController::class, 'post']);
 Route::patch('v1/books/{id}', [BooksController::class, 'patch']);
 
 Route::put('v1/books/{id}', [BooksController::class, 'put']);
+
+Route::get('v1/bookcases', [BookcasesController::class, 'get']);

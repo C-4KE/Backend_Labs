@@ -1,5 +1,7 @@
 <?php
 
+use App\Domain\Archive\Actions\ErrorAction;
+use App\Domain\Archive\Actions\GetBookAction;
 use Illuminate\Support\Facades\Route;
 use App\Http\ApiV1\Modules\Archive\Controllers\BooksController;
 

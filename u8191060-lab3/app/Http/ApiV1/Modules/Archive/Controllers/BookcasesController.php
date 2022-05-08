@@ -34,8 +34,6 @@ class BookcasesController
             }
         } catch (ModelNotFoundException $exc) {
             return (new ErrorResource((new ErrorAction)->execute(get_class($exc), 'Item with given id was not found.')))->response()->setStatusCode(404);
-        } catch (Exception $exc) {
-            return (new ErrorResource((new ErrorAction)->execute(get_class($exc), 'Unexpected error.')))->response()->setStatusCode(500);
         }
     }
 }

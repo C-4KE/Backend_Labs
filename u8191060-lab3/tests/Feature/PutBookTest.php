@@ -95,3 +95,25 @@ test('Put query with incorrect parameters', function() {
         "code" => "Illuminate\\Database\\QueryException"
     ]]);
 });
+
+test('Id that doesn\'t exist in database', function() {
+    // Act
+    $actual = putJson('api/v1/books/500?title=A&author=A&publisher=A&release_date=2000-10-10&bookcase_id=1');
+    // Assert
+    $actual->assertStatus(404);
+    $actual->assertExactJson(["error" => [
+        "code" => "Illuminate\\Database\\Eloquent\\ModelNotFoundException",
+        "message" => "Item with given id was not found."
+    ]]);
+});
+
+test('Id that isn\'t an integer.', function() {
+    // Act
+    $actual = putJson('api/v1/books/k?title=A&author=A&publisher=A&release_date=2000-10-10&bookcase_id=1');
+    // Assert
+    $actual->assertStatus(400);
+    $actual->assertExactJson(["error" => [
+        "code" => "CastingError",
+        "message" => "Invalid id. Id must be integer number."
+    ]]);
+});

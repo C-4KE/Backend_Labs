@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\ApiV1\Modules\Archive\Controllers\BooksController;
 
 /*
 |--------------------------------------------------------------------------

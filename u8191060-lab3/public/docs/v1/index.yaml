@@ -1,0 +1,602 @@
+openapi : "3.0.0"
+info:
+  version: 1.0.0
+  title: Books archive
+servers:
+  - url: http://u8191060-lab3.local/api/v1
+paths:
+  /books:
+    get:
+      summary: Info about all books
+      operationId: showAllBooks
+      tags:
+        - books
+      responses:
+        '200':
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Book"
+                  errors: null
+                  meta: null
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: null
+                  errors:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Error"
+                  meta:
+                    type: object
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: null
+                  errors:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Error"
+                  meta:
+                    type: object
+    post:
+      summary: Add new book
+      operationId: addNewBook
+      tags:
+        - books
+      parameters:
+        - name: title
+          in: query
+          required: true
+          description: Title of the book
+          schema:
+            type: string
+        - name: author
+          in: query
+          required: true
+          description: Author of the book
+          schema:
+            type: string
+        - name: publisher
+          in: query
+          requierd: false
+          description: Publisher of the book
+          schema:
+            type: string
+        - name: release_date
+          in: query
+          required: true
+          description: Date of the book's release (only year matters)
+          schema:
+            type: string
+            format: date
+      responses:
+        '201':
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Book"
+                  errors: null
+                  meta: null
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: null
+                  errors:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Error"
+                  meta:
+                    type: object
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: null
+                  errors:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Error"
+                  meta:
+                    type: object
+  /books/{id}:
+    get:
+      summary: Info for a specific book
+      operationId: showBookById
+      tags:
+        - books
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The id of the book to retrieve
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Book"
+                  errors: null
+                  meta: null
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: null
+                  errors:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Error"
+                  meta:
+                    type: object
+        '404':
+          description: Requested data was not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: null
+                  errors:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Error"
+                  meta:
+                    type: object
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: null
+                  errors:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Error"
+                  meta:
+                    type: object
+    put:
+      summary: Fully update a specific book
+      operationId: updateBook
+      tags:
+        - books
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The id of the book to retrieve
+          schema:
+            type: integer
+            format: int64
+        - name: title
+          in: query
+          required: true
+          description: Title of the book
+          schema:
+            type: string
+        - name: author
+          in: query
+          required: true
+          description: Author of the book
+          schema:
+            type: string
+        - name: publisher
+          in: query
+          requierd: false
+          description: Publisher of the book
+          schema:
+            type: string
+        - name: release_date
+          in: query
+          required: true
+          description: Date of the book's release (only year matters)
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Book"
+                  errors: null
+                  meta: null
+        '400':
+          description: Invalid request parameters or missing required parameters
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: null
+                  errors:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Error"
+                  meta:
+                    type: object
+        '404':
+          description: Book was not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: null
+                  errors:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Error"
+                  meta:
+                    type: object
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: null
+                  errors:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Error"
+                  meta:
+                    type: object
+    patch:
+      summary: Update choosen fields of the specific book
+      operationId: changeBook
+      tags:
+        - books
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The id of the book to retrieve
+          schema:
+            type: integer
+            format: int64
+        - name: title
+          in: query
+          required: false
+          description: Title of the book
+          schema:
+            type: string
+        - name: author
+          in: query
+          required: false
+          description: Author of the book
+          schema:
+            type: string
+        - name: publisher
+          in: query
+          requierd: false
+          description: Publisher of the book
+          schema:
+            type: string
+        - name: release_date
+          in: query
+          required: false
+          description: Date of the book's release (only year matters)
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/Book"
+                  errors: null
+                  meta: null
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: null
+                  errors:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Error"
+                  meta:
+                    type: object
+        '404':
+          description: Book was not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: null
+                  errors:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Error"
+                  meta:
+                    type: object
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: null
+                  errors:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Error"
+                  meta:
+                    type: object
+    delete:
+      summary: Delete a specific book
+      operationId: deleteBook
+      tags:
+        - books
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The id of the book to retrieve
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: null
+                  errors: null
+                  meta: null
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: null
+                  errors:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Error"
+                  meta:
+                    type: object
+  /bookcases:
+    get:
+      summary: Info about all bookcases
+      operationId: showAllBookcases
+      tags:
+        - bookcases
+      responses:
+        '200':
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Bookcase"
+                  errors: null
+                  meta: null
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: null
+                  errors:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Error"
+                  meta:
+                    type: object
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: null
+                  errors:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Error"
+                  meta:
+                    type: object
+  /bookcases/{id}:
+    get:
+      summary: Info about specific bookcase
+      operationId: showBookcase
+      tags:
+        - bookcases
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The id of the book to retrieve
+          schema:
+            type: integer
+            format: int64
+        - name: include
+          in: query
+          required: false
+          description: Include children fields
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: "#/components/schemas/BookcaseWithBooks"
+                  errors: null
+                  meta: null
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: null
+                  errors:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Error"
+                  meta:
+                    type: object
+        '404':
+          description: Requested data was not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: null
+                  errors:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Error"
+                  meta:
+                    type: object
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: null
+                  errors:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Error"
+                  meta:
+                    type: object
+components:
+  schemas:
+    Book:
+      type: object
+      required:
+        - id
+        - title
+        - author
+        - release_date
+        - bookcase_id
+      properties:
+        id:
+          type: integer
+          format: int64
+        title:
+          type: string
+        author:
+          type: string
+        publisher:
+          type: string
+        release_date:
+          type: string
+          format: date
+        bookcase_id:
+          type: integer
+          format: int64
+    Bookcase:
+      type: object
+      required:
+        - id
+        - code
+      properties:
+        id:
+          type: integer
+          format: int64
+        code:
+          type: string
+    BookcaseWithBooks:
+      type: object
+      required:
+        - id
+        - code
+      properties:
+        id:
+          type: integer
+          format: int64
+        code:
+          type: string
+        books:
+          type: array
+          items: 
+            $ref: "#/components/schemas/Book"
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        meta:
+          type: object

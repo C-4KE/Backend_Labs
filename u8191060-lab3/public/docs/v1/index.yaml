@@ -545,6 +545,7 @@ components:
         - title
         - author
         - release_date
+        - bookcase_id
       properties:
         id:
           type: integer
@@ -558,6 +559,9 @@ components:
         release_date:
           type: string
           format: date
+        bookcase_id:
+          type: integer
+          format: int64
     Bookcase:
       type: object
       required:
